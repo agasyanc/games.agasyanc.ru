@@ -60,7 +60,7 @@ group :development do
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
-  gem 'capistrano-rvm'
+  gem 'capistrano-rbenv'
   gem 'capistrano3-puma'# If using Puma
   gem 'whenever', require: false # For cron jobs
   # Use console on exceptions pages [https://github.com/rails/web-console]

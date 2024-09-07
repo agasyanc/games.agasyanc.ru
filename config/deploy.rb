@@ -6,7 +6,8 @@ set :repo_url, "git@github.com:agasyanc/games.agasyanc.ru.git"
 
 
 set :deploy_to, '/home/deploy/games.agasyanc.ru'
-set :rvm_ruby_version, 'ruby-3.2.0' # Use your installed Ruby version
+set :rbenv_type, :user # or :system if rbenv is installed system-wide
+set :rbenv_ruby, '3.3.0' # Replace with the installed Ruby version
 
 # Keep the SQLite database between releases
 set :linked_files, %w{config/database.yml db/production.sqlite3 config/master.key}
