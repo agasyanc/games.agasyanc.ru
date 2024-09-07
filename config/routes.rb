@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post 'off', to: 'switcher#off', as: 'switcher_off'
 
   root 'home#index'
+  get '/privacy', to: 'home#privacy', as: 'privacy'
   post '/', to:  'home#index'
 
   devise_for :players, controllers: { omniauth_callbacks: 'players/omniauth_callbacks' }

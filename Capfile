@@ -3,7 +3,8 @@ require 'capistrano/deploy'
 require 'capistrano/rbenv'
 require 'capistrano/bundler'
 require 'capistrano/rails'
-require 'capistrano/puma'
+require 'capistrano/rails/migrations'
+require 'capistrano/passenger'
 require 'whenever/capistrano'
 
 # Load DSL and set up stages

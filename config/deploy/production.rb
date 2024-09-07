@@ -11,6 +11,8 @@ set :deploy_to, '/home/deploy/games.agasyanc.ru'
 # Specify the Ruby version if needed
 set :rbenv_type, :user # or :system if rbenv is installed system-wide
 set :rbenv_ruby, '3.3.0' # Replace with the installed Ruby version
+# Use Passenger
+
 
 # Optionally set linked files and directories
 set :linked_files, %w{config/database.yml db/production.sqlite3 config/master.key}

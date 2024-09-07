@@ -1,13 +1,7 @@
-= player_signed_in?
-h1 Home#index
-p Find me in app/views/home/index.html.erb
+= current_player.email if player_signed_in?
+h1 Stupid games
+p For play you need to sign in
 = button_to "Sign in with Google", player_google_oauth2_omniauth_authorize_path, data: { turbo: false }
 
-h1 Chat Room
-#messages
-
-= form_with url: '/' do |f|
-  = f.text_field :message 
-  = f.submit
-
   
+= link_to 'Privacy policy', privacy_path

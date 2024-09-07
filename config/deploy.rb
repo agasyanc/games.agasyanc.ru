@@ -15,6 +15,8 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 
 # Default branch is :main or whichever branch you use
 set :branch, 'main'
+set :passenger_enabled, true
+set :keep_releases, 5
 
 
 # Default branch is :master
