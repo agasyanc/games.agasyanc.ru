@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get '/privacy', to: 'home#privacy', as: 'privacy'
+  get '/terms', to: 'home#terms', as: 'terms'
   post '/', to:  'home#index'
 
   devise_for :players, controllers: { omniauth_callbacks: 'players/omniauth_callbacks' }
