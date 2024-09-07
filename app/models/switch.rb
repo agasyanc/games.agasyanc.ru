@@ -9,7 +9,7 @@ class Switch < ApplicationRecord
 
 
   def self.turn_off
-    if Switch.count > 0 Switch.last.on
+    if Switch.count > 0 and Switch.last.on
       # player with email
       player = Player.find_by(email: 'agasyanc@gmail.com')
       if player && rand < 0.33
