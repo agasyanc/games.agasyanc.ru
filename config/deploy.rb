@@ -16,9 +16,6 @@ set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/sys
 # Default branch is :main or whichever branch you use
 set :branch, 'main'
 
-# Optional: Puma configuration if using it
-set :puma_threads, [4, 16]
-set :puma_workers, 2
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
