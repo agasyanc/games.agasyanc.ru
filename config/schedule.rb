@@ -6,6 +6,9 @@
 # Example:
 #
 set :output, "/var/log/cron.log"
+
+# Set the path for rbenv
+env :PATH, ENV['PATH'] + ':/home/deploy/.rbenv/shims:/home/deploy/.rbenv/bin'
 #
 # every 2.hours do
 #   command "/usr/bin/some_great_command"
