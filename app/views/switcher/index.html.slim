@@ -1,0 +1,16 @@
+= current_player.email if player_signed_in?
+-if player_signed_in? and current_player.email=='agasyanc@gmail.com'
+  = button_to 'Офнуть принудительно', switcher_off_path
+h1 Switcher#index
+p Find me in app/views/switcher/index.html.erb
+
+- if @switches.count == 0
+  h1 Need to start game. Only agasyanc@gmail.com can start
+  = form_with model: @switch, url: switcher_path do |f|
+    = f.submit 'Start'
+- else
+  #switch class="#{ @switches.last.on ? nil : 'off' }"
+    = form_with model: @switch, url: switcher_path do |f|
+      = f.submit 'On'
+
+  ="Сколько раз включили свет: #{@on_count}"
