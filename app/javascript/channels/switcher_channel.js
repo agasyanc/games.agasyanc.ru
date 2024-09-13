@@ -27,7 +27,7 @@ consumer.subscriptions.create("SwitcherChannel", {
     
     const last_name = document.getElementById('last_name');
     if (last_name) {
-      switcher.name && (last_name.textContent = switcher.name);
+      switcher.player && (last_name.textContent = switcher.player);
     }
     const last_time = document.getElementById('last_time')
     if (last_time) {
