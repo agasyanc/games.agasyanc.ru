@@ -15,6 +15,27 @@ class Player < ApplicationRecord
     @name=value
   end
 
+  def total_on_duration
+    on_switcher = nil
+    total_duration = 0
+
+    switches.order(:created_at).each do |switch|
+      if switch.on && on_switcher.nil?
+        # Switch is turned on, track the time
+        on_switcher = switch
+      elsif !switch.on && on_switcher.present?
+        # Switch is turned off, calculate the duration it was "on"
+        off_switcher = switch
+        total_duration += off_switcher.created_at - on_switcher.created_at  # Difference in seconds
+        on_switcher = nil  # Reset on_switcher for the next cycle
+      end
+    end
+
+    total_duration
+  end
+
+
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |player|
       player.email = auth.info.email

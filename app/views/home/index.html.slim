@@ -1,8 +1,10 @@
-= current_player.email if player_signed_in?
-h1 Stupid games
-p For play you need to sign in
-= button_to "Sign in with Google", player_google_oauth2_omniauth_authorize_path, data: { turbo: false }
+
+
+h1= link_to 'Игра № 1 «Выключатель»', switcher_path
+
+h2 Что такое «всратые игры»
+p Встарые игры не отличаются изобретательностью. Они придуманы как забавная затея и не требуют к себе никакого внимания. В них можно играть, а можно пожать плечами, мол, что за ерунда и пройти мимо. А можно посмотреть на них как на невероятно прекрасное выражение мысли. Ну, вы всё поняли. Давайте поиграем!
 
   
-= link_to 'Privacy policy', privacy_path
-= link_to 'Terms of Service', terms_path
+/ = link_to 'Privacy policy', privacy_path
+/ = link_to 'Terms of Service', terms_path

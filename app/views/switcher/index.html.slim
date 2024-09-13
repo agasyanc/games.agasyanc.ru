@@ -1,16 +1,31 @@
-= current_player.email if player_signed_in?
--if player_signed_in? and current_player.email=='agasyanc@gmail.com'
-  = button_to 'Офнуть принудительно', switcher_off_path
-h1 Switcher#index
-p Find me in app/views/switcher/index.html.erb
-
+h1 Игра «Выключатель»
+p Вот выключатель. Он делает так, чтобы было светло от лампочки, которую он включает. Ну, или типа того. Это не так важно. А важно, что когда он включен — хорошо, выключен — плохо. Как с кодом в Лосте, прям. Но какие-то силы выключают его. Выключают его случайно. Нужно победить эту злую силу тем, чтобы включать выключатель назад. Игроки могут только включать выключатель. А силы — выключать.
+p Можно подумать, что это самый всрарый кликер, но я скажу так — нет! Игра сделана по мотивам реальных событий, происходящих в моем подъезде. Теперь каждый может поиграть в игру, в которую я играю с соседями уже несколько лет.
 - if @switches.count == 0
   h1 Need to start game. Only agasyanc@gmail.com can start
   = form_with model: @switch, url: switcher_path do |f|
     = f.submit 'Start'
 - else
-  #switch class="#{ @switches.last.on ? nil : 'off' }"
-    = form_with model: @switch, url: switcher_path do |f|
-      = f.submit 'On'
+  .switcher
+    .switcher__game
+      #switch class="#{ @switches.last.on ? nil : 'off' }"
+        = form_with model: @switch, url: switcher_path do |f|
+          = f.button :commit, value: 'On'
+            = image_tag "switcher/off.png", class: 'img_off'
+            = image_tag "switcher/on.png", class: 'img_on'
+            = image_tag "switcher/active.png", class: 'img_active'
+            = image_tag "switcher/off-active.png", class: 'img_off_active'
+  .switcher__stat
+    h3 Бест оф зе бест
+    - @best_players.each do |player|
+      p= "Игрок #{player.name} включил #{player.switches.where(on: true).count} раз(а). Дал света на #{time_ago_in_words Time.now - Switch.total_on_duration_for_player_with_any_off(player.id)} (возможно, не точно, но как это вообще посчитать)"
+    p="Сколько раз включили свет: #{@on_count}"
+    p= "Последний раз свет был выключен: #{time_ago_in_words @last_off.time} назад"
+    p= "В среднем свет выключается в #{time_ago_in_words @mean_off}"
+    p= "Свет горел примерно #{time_ago_in_words Time.now - @total_on_duration}"
+    p= "И был выключен #{time_ago_in_words Time.now - @total_off_duration}"
 
-  ="Сколько раз включили свет: #{@on_count}"
+  p Когда надоест, подумайте, выключательно правильно называть выключателем, или включателем?
+
+  -if player_signed_in? and current_player.email=='agasyanc@gmail.com'
+    = button_to 'Офнуть принудительно', switcher_off_path

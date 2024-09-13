@@ -1,0 +1,15 @@
+.header
+  .header__item
+    - if current_page? '/'
+      h2 ВСРАТЫЕ ИГРЫ
+    - else
+      h2= link_to 'ВСРАТЫЕ ИГРЫ', root_path
+
+      
+  .header__item
+    
+    - if player_signed_in?
+      = "Привет, игрок, кому дано имя #{current_player.name}! Ты авторизовался через почту #{current_player.email}, не волнуйся, почту никто не видит, кроме тебя"
+    -else
+      p Чтобы играть во всратые игры, нужно авторизоваться через гугл, вот кнопка:
+      = button_to "Войти через гугл", player_google_oauth2_omniauth_authorize_path, data: { turbo: false }

@@ -23,8 +23,17 @@ consumer.subscriptions.create("SwitcherChannel", {
       console.error('Invalid JSON received:', data);
       return;
     }
-
+    // alert(switcher)
+    
     // Use toggle to manage the 'off' class based on switcher.on
     switchContainer.classList.toggle('off', !switcher.on);
+
+    if (switcher.on){
+      alert(`Только что ${switcher.player} включил выключатель. Ура!`)
+    }
+    else{
+      alert(`Ой, ой, свет выключили`)
+    }
+    
   }
 });
