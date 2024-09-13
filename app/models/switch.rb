@@ -1,11 +1,22 @@
+require 'action_view'
+require 'action_view/helpers'
+include ActionView::Helpers::DateHelper
+
 class Switch < ApplicationRecord
   belongs_to :player
-  after_commit :send_status
+  after_create :send_status
 
 
-  def self.best_players(count)
+  def self.best_on_players(count)
     Player.joins(:switches)
       .where(switches: {on: true})
+      .group('players.id')
+      .order('COUNT(switches.id) DESC')
+      .limit(count)
+  end
+  def self.best_off_players(count)
+    Player.joins(:switches)
+      .where(switches: {on: false})
       .group('players.id')
       .order('COUNT(switches.id) DESC')
       .limit(count)
@@ -89,13 +100,16 @@ class Switch < ApplicationRecord
   def self.on_count
     where(on: true).count
   end
+  def self.off_count
+    where(on: false).count
+  end
 
 
   def self.turn_off
     if Switch.count > 0 and Switch.last.on
       # player with email
       player = Player.find_by(email: 'agasyanc@gmail.com')
-      if player && rand < 0.9
+      if player && rand < 0.33
         Switch.create!(player: player, on: false, time: Time.now)
       end
     end
@@ -113,7 +127,16 @@ class Switch < ApplicationRecord
         "SwitcherChannel", {
           on: @last_switch.on,
           player: @last_switch.player.name,
-          time: @last_switch.time
+          time: time_ago_in_words(@last_switch.time),
+          best_on_players: Switch.best_on_players(3).map do |p|
+            {name: p.name, count: p.switches.where(on: true).count}
+          end,
+          best_off_players: Switch.best_off_players(3).map do |p|
+            {name: p.name, count: p.switches.where(on: false).count}
+          end,
+          on_time:  time_ago_in_words(Time.now - Switch.total_on_duration),
+          off_time: time_ago_in_words(Time.now - Switch.total_off_duration),
+          count: Switch.count
         }.to_json
       )
       rescue Redis::CannotConnectError => e

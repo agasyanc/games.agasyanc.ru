@@ -16,7 +16,7 @@ env :PATH, ENV['PATH'] + ':/home/deploy/.rbenv/shims:/home/deploy/.rbenv/bin'
 #   rake "some:great:rake:task"
 # end
 #
-every 1.minutes do
+every 30.minutes do
   runner "Switch.turn_off"
 end
 

@@ -29,16 +29,17 @@ body {
 }
 .switcher{
   display: flex;
-  gap:40px;
+  gap:20px;
   flex-wrap: wrap;
 }
 .switcher__game{
   width: 50%;
   display: flex;
   justify-content: center;
-  
 }
-
+.switcher__stat{
+  width: 40%;
+}
 
 #switch{
   background-color: white;
@@ -96,7 +97,7 @@ body {
 }
 
 @media (max-width: 500px){
-  .switcher__game{
+  .switcher__game, .switcher__stat{
     width: 100%;
   }
   #switch{

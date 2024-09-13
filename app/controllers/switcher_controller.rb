@@ -1,16 +1,19 @@
 class SwitcherController < ApplicationController
-  before_action :authenticate_player!, only: [:off]
+  # before_action :authenticate_player!, only: [:off]
 
   def index
+
     @switches = Switch.all
     @switch = Switch.new
     @current = Switch.last
-    @on_count = Switch.on_count
-    @last_off = Switch.where(on: false).last || nil
-    @best_players = Switch.best_players(5)
-    @mean_off = Switch.mean_off
+
+    @best_on_players = Switch.best_on_players(3)
+    @best_off_players = Switch.best_off_players(3)
+
     @total_on_duration = Switch.total_on_duration
     @total_off_duration = Switch.total_off_duration
+
+    return unless player_signed_in?
 
     if params[:commit] == 'Start'
       if @switches.count > 0
@@ -24,22 +27,8 @@ class SwitcherController < ApplicationController
 
     if params[:switch] && params[:switch][:commit] == 'On'
       last_switch = Switch.last
-      if !last_switch.on
-        @switch = Switch.create!(player: current_player, on: true, time: Time.now)
-      end
-
-    end
-
-  end
-
-
-  def off
-    return if current_player.email != 'agasyanc@gmail.com'
-
-    last_switch = Switch.last
-
-    if last_switch.on
-      @switch = Switch.create!(player: current_player, on: false, time: Time.now)
+      @switch = Switch.create!(player: current_player, on: !last_switch.on, time: Time.now)
+      redirect_to switcher_url
     end
 
   end

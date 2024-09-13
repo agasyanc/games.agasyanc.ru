@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get 'switcher', to: 'switcher#index'
   post 'switcher', to: 'switcher#index'
-  post 'off', to: 'switcher#off', as: 'switcher_off'
 
   root 'home#index'
   get '/privacy', to: 'home#privacy', as: 'privacy'
