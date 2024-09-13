@@ -95,7 +95,7 @@ class Switch < ApplicationRecord
     if Switch.count > 0 and Switch.last.on
       # player with email
       player = Player.find_by(email: 'agasyanc@gmail.com')
-      if player && rand < 0.33
+      if player && rand < 0.9
         Switch.create!(player: player, on: false, time: Time.now)
       end
     end
