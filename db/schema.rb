@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_07_130011) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_16_140009) do
+  create_table "player_targets", force: :cascade do |t|
+    t.integer "player_id", null: false
+    t.integer "target_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_player_targets_on_player_id"
+    t.index ["target_id"], name: "index_player_targets_on_target_id"
+  end
+
   create_table "players", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -36,5 +45,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_07_130011) do
     t.index ["player_id"], name: "index_switches_on_player_id"
   end
 
+  create_table "targets", force: :cascade do |t|
+    t.string "code"
+    t.string "shape"
+    t.string "moves"
+    t.string "colors"
+    t.string "transformation"
+    t.integer "player_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_targets_on_player_id"
+  end
+
+  add_foreign_key "player_targets", "players"
+  add_foreign_key "player_targets", "targets"
   add_foreign_key "switches", "players"
+  add_foreign_key "targets", "players"
 end

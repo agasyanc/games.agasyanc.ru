@@ -1,5 +1,9 @@
 class Player < ApplicationRecord
   has_many :switches
+  has_many :targets
+  has_many :player_targets
+  has_many :target_rooms, through: :player_targets, source: :target
+
   after_create :set_default_name
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

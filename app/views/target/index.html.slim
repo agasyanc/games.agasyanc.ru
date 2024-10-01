@@ -1,0 +1,10 @@
+h1 Target#index
+p Find me in app/views/target/index.html.erb
+
+-@targets.each do |target|
+  p= target
+  =link_to target.code, target_game_path(target.code)
+
+=form_with model: @target, url: target_path do |f|
+  = f.text_field :code
+  = f.submit

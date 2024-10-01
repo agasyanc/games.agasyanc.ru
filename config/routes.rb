@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'target', to: 'target#index'
+  get 'target/:code', to: 'target#game', as: 'target_game'
+  post 'target', to: 'target#create'
   get 'switcher', to: 'switcher#index'
   post 'switcher', to: 'switcher#index'
 
